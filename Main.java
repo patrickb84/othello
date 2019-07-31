@@ -1,3 +1,4 @@
+
 /****************************************
  * OTHELLO
  * A Board Game
@@ -7,8 +8,6 @@
  * CSIS 2410
  * 
  ****************************************/
-
-package othello;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -30,13 +29,14 @@ import javax.swing.border.LineBorder;
 import java.awt.Insets;
 
 /**
- * OthelloGUI is the interface for the Othello Board Game.
+ * This is the interface for the Othello Board Game.
+ * 
  * @author Patrick Bradshaw & Gerald Brady
  *
  */
-public class BoardGUI extends JFrame {
+public class Main extends JFrame {
 	private static final long serialVersionUID = 3355080580191028657L;
-	
+
 	private JPanel contentPane;
 	private JLabel lblBlackScore;
 	private JLabel lblWhiteScore;
@@ -44,19 +44,20 @@ public class BoardGUI extends JFrame {
 	private JLabel lblStatus1;
 	private JLabel lblStatus2;
 	private JLabel lblStatus3;
-	
+
 	private Square[][] squares = new Square[8][8];
 	private Status currentDiscColor = Status.BLACK;
 
 	/**
 	 * Where it all begins.
+	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					BoardGUI frame = new BoardGUI();
+					Main frame = new Main();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -68,7 +69,7 @@ public class BoardGUI extends JFrame {
 	/**
 	 * Creates the Game GUI window interface
 	 */
-	public BoardGUI() {
+	public Main() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 550, 550);
 		contentPane = new JPanel();
@@ -76,16 +77,16 @@ public class BoardGUI extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
-		
+
 		JPanel panelBoard = createBoard();
 		contentPane.add(panelBoard);
 
 		JPanel panelTitle = createPanelTitle();
 		contentPane.add(panelTitle, BorderLayout.NORTH);
-		
+
 		JPanel panelSideBar = createPanelSideBar();
 		contentPane.add(panelSideBar, BorderLayout.EAST);
-		
+
 		System.out.print(toConsoleString());
 		System.out.println(currentDiscColor + "'s turn");
 		System.out.println();
@@ -193,14 +194,14 @@ public class BoardGUI extends JFrame {
 	 * @return
 	 */
 	private JPanel createBoard() {
-		JPanel boardGUI = new JPanel();
-		boardGUI.setBackground(Color.GRAY);
-		boardGUI.setSize(new Dimension(200, 200));
-		boardGUI.setPreferredSize(new Dimension(200, 200));
-		boardGUI.setMinimumSize(new Dimension(200, 200));
-		boardGUI.setBounds(new Rectangle(0, 0, 200, 200));
-		boardGUI.setLayout(new GridLayout(0, 8, 0, 0));
-		
+		JPanel Main = new JPanel();
+		Main.setBackground(Color.GRAY);
+		Main.setSize(new Dimension(200, 200));
+		Main.setPreferredSize(new Dimension(200, 200));
+		Main.setMinimumSize(new Dimension(200, 200));
+		Main.setBounds(new Rectangle(0, 0, 200, 200));
+		Main.setLayout(new GridLayout(0, 8, 0, 0));
+
 		EventHandler eventHandler = new EventHandler();
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
@@ -211,24 +212,23 @@ public class BoardGUI extends JFrame {
 				if ((i == 4 && j == 3) || (i == 3 && j == 4)) {
 					squares[i][j] = new Square(i, j, Status.BLACK);
 				}
-				squares[i][j].setPreferredSize(new Dimension(50, 50)); 
+				squares[i][j].setPreferredSize(new Dimension(50, 50));
 				squares[i][j].setOpaque(true);
-				squares[i][j].setMinimumSize(new Dimension(50, 50)); 
+				squares[i][j].setMinimumSize(new Dimension(50, 50));
 				squares[i][j].setMaximumSize(new Dimension(50, 50));
-				squares[i][j].setMargin(new Insets(0, 0, 0, 0)); 
+				squares[i][j].setMargin(new Insets(0, 0, 0, 0));
 				squares[i][j].setBorder(new LineBorder(new Color(0, 0, 0)));
 				squares[i][j].setBackground(new Color(51, 204, 102));
-				
+
 				squares[i][j].addActionListener(eventHandler);
-				squares[i][j].setIcon(squares[i][j].getStatus()
-						.getStatusImage());
-				boardGUI.add(squares[i][j]);
+				squares[i][j].setIcon(squares[i][j].getStatus().getStatusImage());
+				Main.add(squares[i][j]);
 			}
 		}
 		findLegalSquaresInEveryDirection(currentDiscColor);
-		return boardGUI;
+		return Main;
 	}
-	
+
 	/**
 	 * Determines the possible legal moves for current player.
 	 * 
@@ -236,42 +236,40 @@ public class BoardGUI extends JFrame {
 	 * @param rowStep
 	 * @param colStep
 	 */
-	private void findLegalSquares(Status currentDiscColor, int rowStep, 
-			int colStep) {
+	private void findLegalSquares(Status currentDiscColor, int rowStep, int colStep) {
 		int rowX;
 		int colX;
-		
+
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
 				/* Find current players discs, move in a direction */
 				if (squares[i][j].getStatus() == currentDiscColor) {
 					rowX = i + rowStep;
-			  		colX = j + colStep;
-			  		
-			  		/* Stay within board boundaries */
-			  		if (rowX < 0 || rowX > 7 || colX < 0 || colX > 7) {
-			  			continue;
-			  		}
-			  		/* If the next square is opposite, keep moving */
-			  		while (squares[rowX][colX].getStatus()
-			  				== oppositeDisc(currentDiscColor)) {
-			  			rowX = rowX + rowStep; 
-			  			colX = colX + colStep;
-			  			/* Stay in bounds */
-			  			if (rowX < 0 || rowX > 7 || colX < 0 || colX > 7) {
-				  			break;
-				  		}
-			  			/* Then if the next square is open, it is legal */
-			  			if (squares[rowX][colX].getStatus() == Status.OPEN) {
-				  			squares[rowX][colX].updateStatus(Status.LEGAL);
-				  			repaint();
-				  		}
+					colX = j + colStep;
+
+					/* Stay within board boundaries */
+					if (rowX < 0 || rowX > 7 || colX < 0 || colX > 7) {
+						continue;
 					}
-			  	}
+					/* If the next square is opposite, keep moving */
+					while (squares[rowX][colX].getStatus() == oppositeDisc(currentDiscColor)) {
+						rowX = rowX + rowStep;
+						colX = colX + colStep;
+						/* Stay in bounds */
+						if (rowX < 0 || rowX > 7 || colX < 0 || colX > 7) {
+							break;
+						}
+						/* Then if the next square is open, it is legal */
+						if (squares[rowX][colX].getStatus() == Status.OPEN) {
+							squares[rowX][colX].updateStatus(Status.LEGAL);
+							repaint();
+						}
+					}
+				}
 			}
 		}
 	}
-	
+
 	/**
 	 * Passes 8 directions for findLegalSquares() method.
 	 * 
@@ -286,31 +284,30 @@ public class BoardGUI extends JFrame {
 		updateGUI();
 		repaint();
 	}
-	
+
 	/**
-	 * Exchanges players turn, if player has no legal moves, current player 
-	 * is skipped.
+	 * Exchanges players turn, if player has no legal moves, current player is
+	 * skipped.
 	 * 
 	 * @param legalMovesPresent
 	 * @param whoseTurn
-	 * @return true if change of players will happen, false if current player 
-	 * is skipped.
+	 * @return true if change of players will happen, false if current player is
+	 *         skipped.
 	 */
 	public boolean changeTurn(boolean legalMovesPresent, Status whoseTurn) {
 		if (legalMovesPresent) {
 			currentDiscColor = oppositeDisc(currentDiscColor);
 			return true;
-		}
-		else return false;
+		} else
+			return false;
 	}
-	
+
 	private class EventHandler implements ActionListener {
 
 		/**
-		 * Places a disc when the square clicked is a legal square. Then
-		 * performs some clean up, flips discs, changes images, updates
-		 * text, and always checks if the game has been won. If square
-		 * was invalid, it notifies the player.
+		 * Places a disc when the square clicked is a legal square. Then performs some
+		 * clean up, flips discs, changes images, updates text, and always checks if the
+		 * game has been won. If square was invalid, it notifies the player.
 		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -326,8 +323,7 @@ public class BoardGUI extends JFrame {
 				if (checkWin()) {
 					setLabelsWinner();
 				}
-			}
-			else {
+			} else {
 				invalidSquare();
 			}
 		}
@@ -336,9 +332,7 @@ public class BoardGUI extends JFrame {
 		 * Changes status labels when there is a winner.
 		 */
 		private void setLabelsWinner() {
-			Status winner = 
-					(countSquares(Status.WHITE) > countSquares(Status.BLACK))
-							? Status.WHITE : Status.BLACK;
+			Status winner = (countSquares(Status.WHITE) > countSquares(Status.BLACK)) ? Status.WHITE : Status.BLACK;
 			String winText = winner + " WON!!!";
 			lblMoved.setText(winText);
 			lblStatus1.setText(winText);
@@ -354,7 +348,7 @@ public class BoardGUI extends JFrame {
 			lblStatus3.setText("NOT VALID");
 		}
 	}
-	
+
 	/**
 	 * Changes status text according to whether how the turn changed over.
 	 */
@@ -363,49 +357,46 @@ public class BoardGUI extends JFrame {
 			System.out.println(currentDiscColor + "'s turn.\n");
 			lblStatus2.setText(currentDiscColor + " to move");
 		} else {
-			System.out.println("No legal moves. " + currentDiscColor
-					+ "'s move again\n");
+			System.out.println("No legal moves. " + currentDiscColor + "'s move again\n");
 			lblStatus2.setText("No legal moves!");
 			lblStatus3.setText(currentDiscColor + " to move");
 		}
 	}
-	
+
 	/**
 	 * Updates status text on GUI and in console.
+	 * 
 	 * @param square
 	 */
 	private void updateAllStrings(Square square) {
 		System.out.print(toConsoleString());
-		
-		System.out.println(currentDiscColor + " moved to [" 
-				+ square.getRow() + "," + square.getCol() + "]\n");
-		
+
+		System.out.println(currentDiscColor + " moved to [" + square.getRow() + "," + square.getCol() + "]\n");
+
 		lblMoved.setText(currentDiscColor + " moved");
-		lblStatus1.setText( ("Down " + (square.getRow() + 1) + " Right " 
-					+ (square.getCol() + 1)));
-		
-		System.out.println("B: " + countSquares(Status.BLACK) + " / W: " 
-					+ countSquares(Status.WHITE));
-		
+		lblStatus1.setText(("Down " + (square.getRow() + 1) + " Right " + (square.getCol() + 1)));
+
+		System.out.println("B: " + countSquares(Status.BLACK) + " / W: " + countSquares(Status.WHITE));
+
 		lblBlackScore.setText("" + countSquares(Status.BLACK));
 		lblWhiteScore.setText("" + countSquares(Status.WHITE));
 	}
 
 	/**
 	 * Runs method othelloFlip() in every direction to flip discs.
+	 * 
 	 * @param square
 	 */
 	public void flipDiscs(Square square) {
 		for (int i = -1; i <= 1; i++) {
 			for (int j = -1; j <= 1; j++) {
-				othelloFlip(square.getRow(), square.getCol(), 
-						square.getStatus(), i, j);
+				othelloFlip(square.getRow(), square.getCol(), square.getStatus(), i, j);
 			}
 		}
 		updateGUI();
 		repaint();
 	}
-	
+
 	/**
 	 * Cleans up legal markers so that new ones can be placed.
 	 */
@@ -419,7 +410,7 @@ public class BoardGUI extends JFrame {
 			}
 		}
 	}
-	
+
 	/**
 	 * Updates the game board with the current status of everything.
 	 */
@@ -431,9 +422,10 @@ public class BoardGUI extends JFrame {
 			}
 		}
 	}
-	
+
 	/**
 	 * Counts a status type, black, white, open, or legal, of each square.
+	 * 
 	 * @param type
 	 * @return
 	 */
@@ -447,11 +439,11 @@ public class BoardGUI extends JFrame {
 		}
 		return typeCount;
 	}
-	
+
 	/**
 	 * Reference to the console for debug and secondary visual checking.
 	 * 
-	 * @return 
+	 * @return
 	 */
 	public String toConsoleString() {
 		String board = "";
@@ -459,20 +451,20 @@ public class BoardGUI extends JFrame {
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
 				switch (squares[i][j].getStatus()) {
-					case OPEN:
-						token = " ";
-						break;
-					case BLACK:
-						token = "B";
-						break;
-					case WHITE:
-						token = "W";
-						break;
-					case LEGAL:
-						token = "*";
-						break;
-					default:
-						token = " ";
+				case OPEN:
+					token = " ";
+					break;
+				case BLACK:
+					token = "B";
+					break;
+				case WHITE:
+					token = "W";
+					break;
+				case LEGAL:
+					token = "*";
+					break;
+				default:
+					token = " ";
 				}
 				board += "[" + token + "]";
 			}
@@ -493,10 +485,10 @@ public class BoardGUI extends JFrame {
 		else
 			return Status.BLACK;
 	}
-	
+
 	/**
-	 * Checks for disks to be flipped is an inputted direction. If such a 
-	 * condition is present, disks are flipped.
+	 * Checks for disks to be flipped is an inputted direction. If such a condition
+	 * is present, disks are flipped.
 	 * 
 	 * @param rowStart
 	 * @param colStart
@@ -504,8 +496,7 @@ public class BoardGUI extends JFrame {
 	 * @param rowStep
 	 * @param colStep
 	 */
-	public void othelloFlip(int rowStart, int colStart, Status turnColor,
-			int rowStep, int colStep) {
+	public void othelloFlip(int rowStart, int colStart, Status turnColor, int rowStep, int colStep) {
 		int rowX = rowStart + rowStep;
 		int colX = colStart + colStep;
 
@@ -514,17 +505,16 @@ public class BoardGUI extends JFrame {
 			return;
 		}
 		/**
-		 *  We need status of square in the direction we are checking
-		 *  Keep checking until we hit empty cells
+		 * We need status of square in the direction we are checking Keep checking until
+		 * we hit empty cells
 		 */
-		while (squares[rowX][colX].getStatus() == Status.BLACK 
-				|| squares[rowX][colX].getStatus() == Status.WHITE) {
+		while (squares[rowX][colX].getStatus() == Status.BLACK || squares[rowX][colX].getStatus() == Status.WHITE) {
 			/**
-			 *  Return direction to flip chips
-			 *  Run else statement till we hit a cell with the same color
+			 * Return direction to flip chips Run else statement till we hit a cell with the
+			 * same color
 			 */
 			if (squares[rowX][colX].getStatus() == turnColor) {
-				while(!(rowStart == rowX && colStart == colX)) {
+				while (!(rowStart == rowX && colStart == colX)) {
 					squares[rowX][colX].updateStatus(turnColor);
 					rowX = rowX - rowStep;
 					colX = colX - colStep;
@@ -534,20 +524,20 @@ public class BoardGUI extends JFrame {
 			/* Moving to next cell in direction to check for chip color change */
 			else {
 				rowX = rowX + rowStep;
-				colX = colX + colStep;    
+				colX = colX + colStep;
 			}
-			
+
 			/* Check to keep us on the board, break when we are off board */
 			if (rowX < 0 || rowX > 7 || colX < 0 || colX > 7) {
 				break;
 			}
 		}
 	}
-	
+
 	/**
 	 * Searches for the status of squares. If neither player has legal moves
-	 * available, the game is over. If there are no open squares, the game is
-	 * over.
+	 * available, the game is over. If there are no open squares, the game is over.
+	 * 
 	 * @return
 	 */
 	public boolean checkWin() {

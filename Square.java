@@ -1,3 +1,4 @@
+
 /****************************************
  * OTHELLO
  * A Board Game
@@ -8,27 +9,27 @@
  * 
  ****************************************/
 
-package othello;
-
 import javax.swing.JButton;
 
 /**
- * Square represents 1 of 64 buttons on an 8x8 grid that makes up the board
- * in Othello.
+ * Square represents 1 of 64 buttons on an 8x8 grid that makes up the board in
+ * Othello.
+ * 
  * @author Patrick Bradshaw & Gerald Brady
  *
  */
 public class Square extends JButton {
 	private static final long serialVersionUID = -5701300650369169039L;
-	
+
 	private Status status;
 	private int row;
 	private int col;
-	
+
 	/**
-	 * Each square has a row and column (it's location) as well as a status
-	 * which says if it is open, contains a black or white disc, or is a
-	 * potential spot for disc placement (aka legal).
+	 * Each square has a row and column (it's location) as well as a status which
+	 * says if it is open, contains a black or white disc, or is a potential spot
+	 * for disc placement (aka legal).
+	 * 
 	 * @param row
 	 * @param col
 	 * @param status
@@ -41,6 +42,7 @@ public class Square extends JButton {
 
 	/**
 	 * Returns the vertical position.
+	 * 
 	 * @return
 	 */
 	public int getRow() {
@@ -49,6 +51,7 @@ public class Square extends JButton {
 
 	/**
 	 * Returns the horizontal position.
+	 * 
 	 * @return
 	 */
 	public int getCol() {
@@ -57,20 +60,22 @@ public class Square extends JButton {
 
 	/**
 	 * Returns what state the square is: open, legal, black, white.
+	 * 
 	 * @return
 	 */
 	public Status getStatus() {
 		return status;
 	}
-	
+
 	/**
 	 * Changes the status of the square.
+	 * 
 	 * @param status
 	 */
 	public void updateStatus(Status status) {
 		this.status = status;
 	}
-	
+
 	/**
 	 * String representation of the square.
 	 */
