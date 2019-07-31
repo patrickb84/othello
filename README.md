@@ -2,9 +2,9 @@
 
 The game "Othello" written in Java with a GUI. This was an assignment for _Advanced Programming_.
 
-![enter image description here](https://i.ibb.co/JkLSfTY/Capture.jpg)
-
 **:game_die: Play it at [https://repl.it/@PatrickBradshaw/Othello)](https://repl.it/@PatrickBradshaw/Othello)**
+
+![Othello cover image](https://i.ibb.co/2k5WC20/othello-cover-2.jpg)
 
 ---
 
@@ -87,3 +87,5 @@ public void othelloFlip(int rowStart, int colStart, Status turnColor, int rowSte
   }
 }
 ```
+
+![Othello cover image](https://i.ibb.co/dcH1f9h/othello-cover.jpg)
