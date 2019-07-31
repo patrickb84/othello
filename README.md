@@ -6,11 +6,11 @@ The game "Othello" written in Java with a GUI. This was an assignment for _Advan
 
 **:game_die: Play it at [https://repl.it/@PatrickBradshaw/Othello](https://repl.it/@PatrickBradshaw/Othello)**
 
-![Othello cover image](https://i.ibb.co/2k5WC20/othello-cover-2.jpg)
+<img src="https://i.ibb.co/2k5WC20/othello-cover-2.jpg" alt="Our Othella app" width="450px" />
 
 ---
 
-Notably, the function `findLegalSquares()` contains nested loops and conditional statements. It determines and marks what squares are legal.
+Notably, the function `findLegalSquares()` determines and marks what squares are legal.
 
 ```java
 private void findLegalSquares(Status currentDiscColor, int rowStep, int colStep) {
@@ -89,7 +89,3 @@ public void othelloFlip(int rowStart, int colStart, Status turnColor, int rowSte
   }
 }
 ```
-
-
-
-![Othello cover image](https://i.ibb.co/dcH1f9h/othello-cover.jpg)
