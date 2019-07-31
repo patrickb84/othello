@@ -2,10 +2,11 @@
 
 The game "Othello" written in Java with a GUI. This was an assignment for _Advanced Programming_.
 
-![enter image description here](https://i.ibb.co/JkLSfTY/Capture.jpg)
+**:game_die: Play it at [https://repl.it/@PatrickBradshaw/Othello)](https://repl.it/@PatrickBradshaw/Othello)**
+
+![screenshot](https://i.ibb.co/JkLSfTY/Capture.jpg)
 
   
-**:game_die: Play it at [https://repl.it/@PatrickBradshaw/Othello)](https://repl.it/@PatrickBradshaw/Othello)**
 
 ---
 
