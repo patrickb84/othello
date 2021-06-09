@@ -2,7 +2,7 @@
 
 **:game_die: Play it at [https://repl.it/@PatrickBradshaw/Othello](https://repl.it/@PatrickBradshaw/Othello)**
 
-The game _Othello_ written in Java with a GUI. This was an assignment for _Advanced Programming_ at SLCC and was featured in a department-wide showcase.
+The game _Othello_ written in Java with a GUI. It tracks the score and legal moves and is a lot of fun to play with a buddy. This was an assignment for _Advanced Programming_ at SLCC and was featured in a department-wide showcase. 
 
 <img src="https://i.ibb.co/2k5WC20/othello-cover-2.jpg" alt="Our Othella app" width="450px" />
 
