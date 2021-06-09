@@ -1,16 +1,14 @@
-![Othello cover image](https://i.ibb.co/gMtDNbb/othello.jpg)
-
 # Othello
 
-The game "Othello" written in Java with a GUI. This was an assignment for _Advanced Programming_.
-
 **:game_die: Play it at [https://repl.it/@PatrickBradshaw/Othello](https://repl.it/@PatrickBradshaw/Othello)**
+
+The game _Othello_ written in Java with a GUI. This was an assignment for _Advanced Programming_ at SLCC and was featured in a department-wide showcase.
 
 <img src="https://i.ibb.co/2k5WC20/othello-cover-2.jpg" alt="Our Othella app" width="450px" />
 
 ---
 
-Notably, the function `findLegalSquares()` determines and marks what squares are legal.
+The function `findLegalSquares()` determines and marks what squares are legal.
 
 ```java
 private void findLegalSquares(Status currentDiscColor, int rowStep, int colStep) {
@@ -48,7 +46,7 @@ private void findLegalSquares(Status currentDiscColor, int rowStep, int colStep)
 }
 ```
 
-Also the function `othelloFlip()` checks for flip-able discs.
+The function `othelloFlip()` checks for flip-able discs.
 
 ```java
 public void othelloFlip(int rowStart, int colStart, Status turnColor, int rowStep, int colStep) {
